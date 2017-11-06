@@ -6,14 +6,14 @@ import {
 } from 'react-native';
 import { Header, Body, Container, Left, Right, Icon, Button } from 'native-base';
 import { DrawerNavigator } from 'react-navigation';
-import HomeScreen from '../home/home';
+import Home from '../home/home';
 import Kategori from '../kategori/index';
-import SideBar from "../content/sidebar";
+import SideBar from '../content/sidebar';
 
 const MainNav = DrawerNavigator(
 	{
-		Beranda: { screen: HomeScreen },
-		Kategori: { screen: Kategori },
+		Beranda: { screen: Home },
+		Kategori: { screen: Kategori }
 	},
 	{
 		contentComponent: props => <SideBar {...props} />
@@ -22,14 +22,3 @@ const MainNav = DrawerNavigator(
 
 export default MainNav;
 
-const styles = StyleSheet.create({
-	container:{
-	  marginTop: 20
-	},
-	textStyle:{
-		color: 'white'
-	},
-	ContentText:{
-		alignItems: 'center'
-	}
-});

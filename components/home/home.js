@@ -4,7 +4,7 @@ import {
 	Container, Header, Left, Icon, Right, Button, Body 
 	, Content, Card, CardItem, List, ListItem, Grid,Col, Item, Input
 } from "native-base";
-
+import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 
 export default class HomeScreen extends Component {
 	constructor(){
@@ -20,16 +20,10 @@ export default class HomeScreen extends Component {
 		})
 		.then((response) => response.json())
 		.then((data) =>{
-			
 			console.log(data)
 			this.setState({
 				dataBarang:data
-				
-				
 			})
-		
-
-			
 		})
 		.catch((error)=>{
 			console.log(error)
@@ -50,26 +44,11 @@ export default class HomeScreen extends Component {
 					<Body>
 						<Text style={styles.TextHeader} >Beranda</Text>
 					</Body>
-					<Right>
-                        <Button transparent>
-                            <Icon name="cart" style={{fontSize:20}}/>
-                        </Button>
-					</Right>
+					<Right />
 
 				</Header>
 				<ScrollView>
-					<Content style={{alignContent: 'center'}} searchBar rounded>
-						<List>
-							<ListItem searchBar rounded>
-								<Item>
-									<Icon name="ios-search" />
-									<Input placeholder="Search" />
-								</Item>
-								<Button transparent>
-									<Text>Search</Text>
-								</Button>
-							</ListItem>
-						</List>
+					<Content style={{alignContent: 'center'}}>
 						<List >
 						{
 							this.state.dataBarang.map((item, index) => (
@@ -77,7 +56,7 @@ export default class HomeScreen extends Component {
 								<CardItem>
 									<Left>
 									<Body>
-										<Text>{item.InfoMerkBarang[0].NamaMerkBarang}</Text>
+										<Text>{item.InfoKatBarang[0].NamaKategoriBarang} - {item.InfoMerkBarang[0].NamaMerkBarang}</Text>
 									</Body>
 									</Left>
 								</CardItem>
@@ -85,20 +64,20 @@ export default class HomeScreen extends Component {
 									<Grid>
 										<Col style={{ backgroundColor: '#635DB7', height: 200 }}>
 											<Image 
-											source={{uri: "https://github.com/dkarmila/apiMiniProject/raw/master/barang/"+item.GambarBarang}} 
+											source={{uri: "https://github.com/dkarmila/apiMiniProject/raw/master/assets/images/"+item.GambarBarang}} 
 											style={{height: 50, width: null, flex: 1}}/>
 										</Col>
 									</Grid>
 								</CardItem>
 								<CardItem>
 									<Left>
-										<Button rounded success>
-											<Icon iconLeft style={{fontSize:20}} name="cart" />
-										</Button>
+										<Text style={{fontSize:20}}>IDR {item.HargaBarang}</Text>
 									</Left>
-									<Body><Text style={{fontSize:20}}>{item.HargaBarang}</Text></Body>
+									<Body/>
 									<Right>
-										<Button rounded info>
+										<Button 
+											rounded info 
+											onPress={() => this.props.navigation.navigate("DetailBarang", {idBar:item.KdBarang})}>
 											<Icon style={{fontSize:20}} name="paper" />
 										</Button>
 									</Right>

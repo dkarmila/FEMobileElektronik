@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import {
-    Text
-} from 'react-native';
-import {
-    Container, Content, Header, Body
-} from 'native-base';
 import { StackNavigator } from 'react-navigation';
 import Kategori from './kategori';
 import DetailKategori from './detailKategori';
+import DetailBarang from '../barang/detailbarang';
 
 export default (KategoriNav = StackNavigator(
     {
         Kategori : { screen: Kategori },
-        DetailKategori : { screen: DetailKategori }
+        DetailKategori : { screen: DetailKategori },
+        DetailBarang : { screen: DetailBarang }
     }
 ));

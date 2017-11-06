@@ -1,11 +1,10 @@
 import React from "react";
-import { AppRegistry, Image, StatusBar } from "react-native";
+import { AppRegistry, Image, StatusBar, AsyncStorage, Alert } from "react-native";
 import { 
   Container, Content, Text, List, ListItem, Left, Icon, Body 
   ,Right, Item
 } from "native-base";
 const routes = ["Beranda", "Kategori"];
-const symbol = ["home", "star"]
 
 export default class SideBar extends React.Component {
   render() {
@@ -16,7 +15,6 @@ export default class SideBar extends React.Component {
             source={require("../../assets/images/side.jpg")}
             style={{
               height: 180,
-              //alignSelf: "stretch",
               justifyContent: "center",
               alignItems: "center"
             }}> 
@@ -35,8 +33,27 @@ export default class SideBar extends React.Component {
               );
             }}
           />
+            <ListItem
+                button
+                onPress={this.Logout}>
+                <Icon name="cog" style={{color:'gray'}}/><Text>{"\t"}</Text>
+                <Text style={{fontSize:18}}>Log Out</Text>
+            </ListItem>
         </Content>
       </Container>
     );
+  }
+
+  Logout = () =>{
+    //Alert.alert("hai")
+    AsyncStorage.removeItem('token', (error, result) => {
+      Alert.alert(
+        "Logout",
+        "Berhasil Keluar!",
+        [
+          { text: "OK", onPress: () => this.props.navigation.navigate('Login')}
+        ]
+      )
+    })
   }
 }
